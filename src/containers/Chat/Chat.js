@@ -66,15 +66,13 @@ export default class Chat extends Component {
         {user &&
         <div>
           {this.state.messages.map((msg) => {
-            //console.log('User :' + user.name);
-            //console.log('Id :' + msg.from);
-            var chatStyle = (user.name == msg.from)? style.me : style.them;
-            return <div className={style.chatContainer}>
+            const chatStyle = (user.name === msg.from) ? style.me : style.them;
+            return (<div className={style.chatContainer}>
             <div className={chatStyle} key={`chat.msg.${msg.id}`}>
             <span>☺ {msg.from.toUpperCase()}</span>
             <p> {msg.text}</p>
             </div>
-            </div>;
+            </div>);
           })}
           <div className="navbar navbar-default navbar-fixed-bottom">
           <form className="login-form" onSubmit={this.handleSubmit}>
