@@ -1,13 +1,70 @@
 .chat {
+  background-color: #f2f2f2;
   input {
     padding: 5px 10px;
+    margin : 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    background: #f2f2f2;
+    flex-grow: 1;
   }
   form {
-    margin: 30px 0;
+    display: flex;
     :global(.btn) {
-      margin-left: 10px;
+      margin: 10px 10px 10px 0px;
+      color: white;
+      background-color: #4dacf6;
+      float:right;
+      display: inline;
+    }
+  }
+}
+.chatContainer{
+  width: 100%;
+  display: block;
+  overflow: auto;
+}
+.me{
+  width: 250px;
+  color: white;
+  background: #4dacf6;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+  float: left;
+  display: block;
+  overflow: auto;
+  overflow-wrap: break-word;
+  span{
+    margin: 3px;
+    font-size: 90%;
+  }
+  p{
+    margin: 0px;
+    font-size: 140%;
+  }
+}
+
+.them{
+  width: 250px;
+  background: white;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+  float: right;
+  display: block;
+  overflow: auto;
+  overflow-wrap: break-word;
+  span{
+    margin: 3px;
+    color: black;
+    font-size: 90%;
+  }
+  p{
+    margin: 0px;
+    font-size: 140%;
+    span{
+      color: grey;
     }
   }
 }

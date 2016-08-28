@@ -12,7 +12,7 @@ export default class About extends Component {
 
   render() {
     const {showKitten} = this.state;
-    const kitten = require('./kitten.jpg');
+    const kitten = require('./puppy.jpg');
     return (
       <div className="container">
         <h1>About Us</h1>
@@ -35,7 +35,7 @@ export default class About extends Component {
         <h3>Images</h3>
 
         <p>
-          Psst! Would you like to see a kitten?
+          Psst! Would you like to see a puppy?
 
           <button className={'btn btn-' + (showKitten ? 'danger' : 'success')}
                   style={{marginLeft: 50}}

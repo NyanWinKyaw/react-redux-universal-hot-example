@@ -1,5 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+const filter = require('profanity-filter');
+
+filter.addWord('potato');
+filter.addWord('REA');
+filter.addWord('carbs');
+filter.addWord('real estate agent');
+filter.addWord('/me pats kitty', '* Robbie pats kitty');
 
 @connect(
   state => ({user: state.auth.user})
@@ -38,9 +45,9 @@ export default class Chat extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    const msg = this.state.message;
-
+    const replacementMethod = this.state.message[0] === '/' ? 'word' : 'grawlix';
+    filter.setReplacementMethod(replacementMethod);
+    const msg = filter.clean(this.state.message);
     this.setState({message: ''});
 
     socket.emit('msg', {
@@ -52,27 +59,34 @@ export default class Chat extends Component {
   render() {
     const style = require('./Chat.scss');
     const {user} = this.props;
-
     return (
-      <div className={style.chat + ' container'}>
+      <div className={style.chat + ' container'} >
         <h1 className={style}>Chat</h1>
 
         {user &&
         <div>
-          <ul>
           {this.state.messages.map((msg) => {
-            return <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>;
+            //console.log('User :' + user.name);
+            //console.log('Id :' + msg.from);
+            var chatStyle = (user.name == msg.from)? style.me : style.them;
+            return <div className={style.chatContainer}>
+            <div className={chatStyle} key={`chat.msg.${msg.id}`}>
+            <span>☺ {msg.from.toUpperCase()}</span>
+            <p> {msg.text}</p>
+            </div>
+            </div>;
           })}
-          </ul>
+          <div className="navbar navbar-default navbar-fixed-bottom">
           <form className="login-form" onSubmit={this.handleSubmit}>
-            <input type="text" ref="message" placeholder="Enter your message"
-             value={this.state.message}
+             <input type="text" ref="message" placeholder="Enter your message"
+             value={this.state.message}java
              onChange={(event) => {
                this.setState({message: event.target.value});
              }
             }/>
-            <button className="btn" onClick={this.handleSubmit}>Send</button>
+            <button className="btn" onClick={this.handleSubmit}>SEND</button>
           </form>
+          </div>
         </div>
         }
       </div>
